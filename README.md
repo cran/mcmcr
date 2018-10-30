@@ -1,17 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# mcmcr
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis-CI Build
 Status](https://travis-ci.org/poissonconsulting/mcmcr.svg?branch=master)](https://travis-ci.org/poissonconsulting/mcmcr)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/mcmcr?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/mcmcr)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/poissonconsulting/mcmcr/master.svg)](https://codecov.io/github/poissonconsulting/mcmcr?branch=master)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-
-# mcmcr
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mcmcr)](https://cran.r-project.org/package=mcmcr)
+[![CRAN
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/mcmcr)](https://CRAN.R-project.org/package=mcmcr)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1218026.svg)](https://doi.org/10.5281/zenodo.1218026)
 
 ## Introduction
 
@@ -144,8 +146,8 @@ coef(mcmcr_example)
 #> 1 alpha[1]      3.72  0.901   4.15 2.21   5.23 0.00120
 #> 2 alpha[2]      4.72  0.901   5.26 3.21   6.23 0.00120
 #> 3 beta[1,1]     0.972 0.375   2.57 0.251  1.71 0.0225 
-#> 4 beta[2,1]     1.97  0.375   5.24 1.25   2.71 0.00500
-#> 5 beta[1,2]     1.97  0.375   5.24 1.25   2.71 0.00500
+#> 4 beta[2,1]     1.97  0.375   5.24 1.25   2.71 0.005  
+#> 5 beta[1,2]     1.97  0.375   5.24 1.25   2.71 0.005  
 #> 6 beta[2,2]     2.97  0.375   7.91 2.25   3.71 0.00120
 #> 7 sigma         0.791 0.741   1.31 0.425  2.56 0.00120
 rhat(mcmcr_example, by = "term")
@@ -162,18 +164,25 @@ rhat(mcmcr_example, by = "term")
 plot(mcmcr_example[["alpha"]])
 ```
 
-![](tools/README-unnamed-chunk-2-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ## Installation
+
+To install the latest official release from
+[CRAN](https://CRAN.R-project.org/package=mcmcr)
+
+    install.packages("mcmcr")
 
 To install the latest development version from
 [GitHub](https://github.com/poissonconsulting/mcmcr)
 
     # install.packages("devtools")
+    devtools::install_github("poissonconsulting/err")
+    devtools::install_github("poissonconsulting/checkr")
     devtools::install_github("poissonconsulting/mcmcr")
 
 Alternatively install the latest development version from the Poisson
-drat [repository](https://github.com/poissonconsulting/drat) using
+drat [repository](https://github.com/poissonconsulting/drat)
 
     # install.packages("drat")
     drat::addRepo("poissonconsulting")
@@ -181,23 +190,23 @@ drat [repository](https://github.com/poissonconsulting/drat) using
 
 ## Citation
 
-    Warning in citation(package = "mcmcr"): no date field in DESCRIPTION file
-    of package 'mcmcr'
-    Warning in citation(package = "mcmcr"): could not determine year for
-    'mcmcr' from package DESCRIPTION file
-    
-    To cite package 'mcmcr' in publications use:
-    
-      Joe Thorley (NA). mcmcr: Manipulate MCMC Samples. R package
-      version 0.0.1.
-    
-    A BibTeX entry for LaTeX users is
-    
-      @Manual{,
-        title = {mcmcr: Manipulate MCMC Samples},
-        author = {Joe Thorley},
-        note = {R package version 0.0.1},
-      }
+``` 
+
+To cite package 'mcmcr' in publications use:
+
+  Joe Thorley (2018). mcmcr: Manipulate MCMC Samples. R package
+  version 0.0.1.9002. https://github.com/poissonconsulting/mcmcr
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {mcmcr: Manipulate MCMC Samples},
+    author = {Joe Thorley},
+    year = {2018},
+    note = {R package version 0.0.1.9002},
+    url = {https://github.com/poissonconsulting/mcmcr},
+  }
+```
 
 ## Contribution
 

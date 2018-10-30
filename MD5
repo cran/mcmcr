@@ -1,7 +1,7 @@
-8d975d6d8f8af2d38f06941c6447a453 *DESCRIPTION
+3ba03fe31dd4d757863b1882969f2583 *DESCRIPTION
 fdc10d53920da85763ebf066e081432f *LICENSE
 703a3db93982a42d03e90e65e1b30265 *NAMESPACE
-fd82bbb3ecf023666edbd590a7d9b65b *NEWS.md
+27654de9b0f3e7775a863711ee57f271 *NEWS.md
 ea2b4cc1c9592e77e265e7a8374106e9 *R/anyNA.R
 6bc87a19707b3b4e70dd9950f094fd32 *R/as.R
 d05e5da0a05b68aab880208ce89f848c *R/as.mcmc.list.R
@@ -13,7 +13,7 @@ e633cb611c9f9b8e3e8c6e4792cacdd9 *R/bind-parameters.R
 8e5e63806d8b8b0d20bcf0536aaec83c *R/coef.R
 86f6d21d669afb19ec2996b6a00ff8f1 *R/collapse-chains.R
 b5e9937f50b856e43578e9b1bc509375 *R/combine-dimensions.R
-5b18fed050c4ecbda983bcbfdf4c11d5 *R/combine-samples-n.R
+4616d591c8402360f820597a80af1437 *R/combine-samples-n.R
 e6dcc09bd4005cc0ec198ad6023c01e9 *R/combine-samples.R
 3e9225f4997814650aa05447000983fa *R/converged.R
 14b24edd53a3527679e96401e8c8d750 *R/data.R
@@ -46,9 +46,9 @@ b16c9c6b1672658015697c2144aca141 *R/rhat.R
 19b59a2dda3747e1eb409d2e90916aea *R/term.R
 83d786c5a0ee09d91350d74d4312a101 *R/terms.R
 b1a69ad5a45c57f849b4e5038c985305 *R/thin.R
-5544f20d78a2e79a42105bc11bb5ce2c *R/utils.R
+02bec1d226f3adeb07fa93ee78d21f85 *R/utils.R
 28bdef6dfca5ccca781c0e013b219fa4 *R/zero.R
-81e796575c96353ff56be26ecda2cd4c *README.md
+5a9418a66192caa66614ef7667725364 *README.md
 66128aeefdd908dcc100f19eeabbdd7e *data/mcmcr_example.rda
 6e7a39359d4016f40c8ed148cd2402b1 *inst/JOSS/paper.Rmd
 d283d21927e36f88f566f02852935c65 *inst/JOSS/paper.bib
@@ -67,16 +67,17 @@ e9827d262fdc5ebf888e6b1be755ec21 *man/bind_dimensions.Rd
 0fdb0fe71f0aa7484033c2f546dd84e7 *man/bind_dimensions_n.Rd
 25548d0f49af8c0905dd703b25a0ba1a *man/bind_iterations.Rd
 601a9a7e37b5bc2f037ddc741e295c61 *man/bind_parameters.Rd
-a56fad6d70f4d72efefba25d3a99c0e7 *man/coef.Rd
+fdfea4c5ce75c51537c83bb671858a88 *man/coef.Rd
 963831035a1961bd188abc9d65be0e5d *man/collapse_chains.Rd
-e45a9f479a4964e0d7bdc97dcaba2982 *man/combine_dimensions.Rd
+2b030ed22b277f6bf3396309aa87bd5b *man/combine_dimensions.Rd
 b9c99a2c9600f7315fbc0bdbbad8ac8a *man/combine_samples.Rd
 7b44fc3eb2e7874f055f67e77e74267d *man/combine_samples_n.Rd
 548a5a2baa25fcb52161eba2f3bae226 *man/converged.Rd
 880c5923eac044580c6317f0715b0e06 *man/dims.Rd
 6140e4292f511478a636429963fa2f51 *man/esr.Rd
 6378eb5c091ade87e763f50a645f32bf *man/ess.Rd
-46c267f95cea23005071dfb68566e5c8 *man/estimates.Rd
+98cca1152a46021c874e07f6d5beaea9 *man/estimates.Rd
+8893582563721b1d6cc6677f5b2dd19f *man/figures/README-unnamed-chunk-2-1.png
 03523d306690ab27c5529570ac815085 *man/is.mcarray.Rd
 cf871a44cfdb1848ee9ce005274c6384 *man/is.mcmcarray.Rd
 1e77458b6401592ea64afdb3d788cbaa *man/is.mcmcr.Rd
@@ -85,7 +86,7 @@ cf871a44cfdb1848ee9ce005274c6384 *man/is.mcmcarray.Rd
 3cad1e2f73ba5c64e80519e65b814782 *man/mcmc_map.Rd
 c2fa01c3e7d834c1ab50d38188f5fe28 *man/mcmcarray-object.Rd
 09eaa31d2adf6bdcca45486d4cbd51df *man/mcmcr-object.Rd
-34e1a2502816835ec74f9511e0908ecc *man/mcmcr-package.Rd
+96bd5f35c11cd29f4196b2860c06ab00 *man/mcmcr-package.Rd
 58d6ccde4f00092707ee83dc4a9617b4 *man/mcmcr_example.Rd
 add624168a6727b2d8592e8fe4e2be2b *man/mcmcrs-object.Rd
 38706061855fd059e40ae675c53d2e97 *man/mcmcrs.Rd
@@ -96,7 +97,7 @@ a3d2b439e4fcdacb29a1d3564ee63c05 *man/npars.Rd
 1bbc79055bfef30e2aff1a49aa002957 *man/nsams.Rd
 000306ac3d7adc1836d8c68f27a8bec8 *man/nsims.Rd
 38f8b47d26bbedda6f88c9ee04d3a4cd *man/nterms.Rd
-af498b411282066fcbcd93aee6d2b06a *man/parameters.Rd
+8856253ee4c51391bd714da886ec2239 *man/parameters.Rd
 8e71aebc737b5702981151ad45dc0c87 *man/pdims.Rd
 81fd43abe70085c880ff6e016a585482 *man/pvalue.Rd
 82578897d7d5fa0b7e470831f7486d48 *man/rhat.Rd
@@ -142,6 +143,3 @@ e880e9d0622a32ba32d44821d6538d4c *tests/testthat/test-print.R
 e3d80633695b212cd3130942564a114d *tests/testthat/test-thin.R
 cd6cd0fd1f7309091a862ef66839701e *tests/testthat/test-utils.R
 a94c0a35dd7e9299744b59cf3498fc12 *tests/testthat/test-zero.R
-406ef7f7448bf2bd3e1caebda34cf842 *tools/README-unnamed-chunk-2-1.png
-26aae8f8980f56c60301e70c251fbfbc *tools/README-unnamed-chunk-2-2.png
-e4d88232652ad96a96f36236b2c6cba8 *tools/README-unnamed-chunk-2-3.png
