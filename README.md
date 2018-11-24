@@ -6,13 +6,13 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis-CI Build
 Status](https://travis-ci.org/poissonconsulting/mcmcr.svg?branch=master)](https://travis-ci.org/poissonconsulting/mcmcr)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/mcmcr?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/mcmcr)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/poissonconsulting/mcmcr/master.svg)](https://codecov.io/github/poissonconsulting/mcmcr?branch=master)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mcmcr)](https://cran.r-project.org/package=mcmcr)
-[![CRAN
-Downloads](http://cranlogs.r-pkg.org/badges/grand-total/mcmcr)](https://CRAN.R-project.org/package=mcmcr)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1218026.svg)](https://doi.org/10.5281/zenodo.1218026)
 
 ## Introduction
@@ -91,7 +91,7 @@ objects. In particular it provides functions to
     and `nsams` as well as it’s parameter dimensions (`pdims`) and term
     dimensions (`tdims`);
   - `subset` objects by chains, iterations and/or parameters;
-  - `bind_xx` a pair of objects by their `xx_chains`, `_iterations`,
+  - `bind_xx` a pair of objects by their `xx_chains`, `xx_iterations`,
     `xx_parameters` or (parameter) `xx_dimensions`;
   - combine the samples of two (or more) MCMC objects using
     `combine_samples` (or `combine_samples_n`) or combine the samples of
@@ -187,26 +187,6 @@ drat [repository](https://github.com/poissonconsulting/drat)
     # install.packages("drat")
     drat::addRepo("poissonconsulting")
     install.packages("mcmcr")
-
-## Citation
-
-``` 
-
-To cite package 'mcmcr' in publications use:
-
-  Joe Thorley (2018). mcmcr: Manipulate MCMC Samples. R package
-  version 0.0.1.9002. https://github.com/poissonconsulting/mcmcr
-
-A BibTeX entry for LaTeX users is
-
-  @Manual{,
-    title = {mcmcr: Manipulate MCMC Samples},
-    author = {Joe Thorley},
-    year = {2018},
-    note = {R package version 0.0.1.9002},
-    url = {https://github.com/poissonconsulting/mcmcr},
-  }
-```
 
 ## Contribution
 
