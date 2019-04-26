@@ -22,17 +22,18 @@ esr(x, ...)
 
 \method{esr}{mcmcr}(x, by = "all", as_df = FALSE, ...)
 
-\method{esr}{mcmcrs}(x, by = "all", ...)
+\method{esr}{mcmcrs}(x, by = "all", as_df = FALSE, ...)
 }
 \arguments{
-\item{x}{An MCMC object}
+\item{x}{An MCMC object.}
 
-\item{...}{Unused}
+\item{...}{Unused.}
 
-\item{by}{A string indicating whether to return the estimates by
-the object ("all"), "parameter" or "term"}
+\item{by}{A string indicating whether to determine by
+"term", "parameter" or "all".}
 
-\item{as_df}{A flag indicating whether to return the estimates as a data frame versus a list.}
+\item{as_df}{A flag indicating whether to return the values as a
+data frame versus a named list.}
 }
 \value{
 The esr value(s) as a data frame or list
@@ -61,6 +62,7 @@ lag \eqn{k} when \eqn{\rho_{k+1}(\theta) < 0}.
 
 \examples{
 esr(mcmcr_example)
+esr(mcmcrs(mcmcr_example, mcmcr_example))
 }
 \references{
 Brooks, S., Gelman, A., Jones, G.L., and Meng, X.-L. (Editors). 2011. Handbook for Markov Chain Monte Carlo. Taylor & Francis, Boca Raton.

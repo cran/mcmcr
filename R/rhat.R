@@ -1,6 +1,6 @@
 #' R-hat
 #'
-#' Calculates the uncorrected, untransformed, univariate
+#' By default calculates the uncorrected, unfolded, univariate,
 #' split R-hat (potential scale reduction factor) values.
 #'
 #' @param x An MCMC object.
@@ -9,6 +9,7 @@
 #' "term", "parameter" or "all".
 #' @param as_df A flag indicating whether to return the values as a
 #' data frame versus a named list.
+#' @param bound flag specifying whether to bind mcmcrs objects by their chains before calculating rhat.
 #' @return The rhat value(s).
 #' @references
 #' Gelman, A., and Rubin, D.B. 1992. Inference from Iterative Simulation Using Multiple Sequences. Statistical Science 7(4): 457–472.
@@ -18,28 +19,37 @@
 #' rhat(mcmcr_example, by = "parameter")
 #' rhat(mcmcr_example, by = "term")
 #' rhat(mcmcr_example, by = "term", as_df = TRUE)
+#' rhat(mcmcrs(mcmcr_example, mcmcr_example))
+#' rhat(mcmcrs(mcmcr_example, mcmcr_example), bound = TRUE)
 rhat <- function(x, ...) {
   UseMethod("rhat")
 }
 
 #' @describeIn rhat R-hat for an mcarray object
 #' @export
-rhat.mcarray <- function(x, by = "all", as_df = FALSE, ...)
+rhat.mcarray <- function(x, by = "all", as_df = FALSE, ...) {
+  check_unused(...)
   rhat(as.mcmcarray(x), by = by, as_df = as_df)
+}
 
 #' @describeIn rhat R-hat for an mcmc object
 #' @export
-rhat.mcmc <- function(x, by = "all", as_df = FALSE, ...)
+rhat.mcmc <- function(x, by = "all", as_df = FALSE, ...) {
+  check_unused(...)
   rhat(as.mcmcr(x), by = by, as_df = as_df)
+}
 
 #' @describeIn rhat R-hat for an mcmc.list object
 #' @export
-rhat.mcmc.list <- function(x, by = "all", as_df = FALSE, ...)
+rhat.mcmc.list <- function(x, by = "all", as_df = FALSE, ...) {
+  check_unused(...)
   rhat(as.mcmcr(x), by = by, as_df = as_df)
+}
 
 #' @describeIn rhat R-hat for an mcmcarray object
 #' @export
 rhat.mcmcarray <- function(x, by = "all", as_df = FALSE, ...) {
+  check_unused(...)
   check_vector(by, c("all", "parameter", "term"), length = 1)
   check_flag(as_df)
 
@@ -70,21 +80,30 @@ rhat.mcmcarray <- function(x, by = "all", as_df = FALSE, ...) {
 #' @describeIn rhat R-hat for an mcmcr object
 #' @export
 rhat.mcmcr <- function(x, by = "all", as_df = FALSE, ...) {
+  check_unused(...)
   parameters <- parameters(x)
   x <- lapply(x, rhat, by = by, as_df = as_df)
   if(!as_df) {
     if (by != "all") return(x)
     return(max(unlist(x)))
   }
-  x <- Map(x, parameters, f = function(x, p) {parameters(x[[1]]) <- p; x})
+  x <- Map(x, parameters, f = function(x, p) { parameters(x[[1]]) <- p; x})
   x <- do.call(rbind, x)
-  if(by == "all")
+  if (by == "all")
     return(tibble(all = "all", rhat = max(x$rhat)))
   x
 }
 
 #' @describeIn rhat R-hat for an mcmcrs object
 #' @export
-rhat.mcmcrs <- function(x, by = "all", as_df = FALSE, ...) {
+rhat.mcmcrs <- function(x, by = "all", as_df = FALSE,
+                        bound = FALSE, ...) {
+  check_flag(bound)
+  check_unused(...)
+
+  if(bound) {
+    x <- Reduce(bind_chains, x)
+    return(rhat(x, by = by, as_df = as_df))
+  }
   lapply(x, rhat, by = by, as_df = as_df)
 }

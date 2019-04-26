@@ -63,16 +63,17 @@ set_class <- function(x, class) {
 .rhat <- function(x) {
   stopifnot(is.matrix(x))
 
+  niters <- niters(x)
+  nchains <- nchains(x)
+
   mean_chain <- apply(x, 1L, mean)
   var_chain <- apply(x, 1L, stats::var)
-
-  niters <- niters(x)
 
   var_between <- niters * stats::var(mean_chain)
   var_within <- mean(var_chain)
   rhat <- sqrt((var_between/var_within + niters - 1) / niters)
 
-  if (is.nan(rhat)) rhat <- 1
+  if (is.nan(rhat) || (!is.na(rhat) && rhat < 1)) rhat <- 1
   round(rhat, 3)
 }
 
@@ -83,7 +84,13 @@ set_class <- function(x, class) {
 }
 
 tibble <- function(...) {
-  if(requireNamespace("tibble", quietly = TRUE))
-    return(tibble::tibble(...))
-  data.frame(..., stringsAsFactors = FALSE)
+  data <- data.frame(..., stringsAsFactors = FALSE)
+  class(data) <- c("tbl_df", "tbl", "data.frame")
+  data
+}
+
+abind <- function(x, x2, along, dimnames = TRUE) {
+  x <- abind::abind(x, x2, along = along)
+  if(!isTRUE(dimnames)) dimnames(x) <- NULL
+  x
 }
