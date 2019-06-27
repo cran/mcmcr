@@ -3,7 +3,10 @@
 
 # mcmcr
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+<!-- badges: start -->
+
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis-CI Build
 Status](https://travis-ci.org/poissonconsulting/mcmcr.svg?branch=master)](https://travis-ci.org/poissonconsulting/mcmcr)
 [![AppVeyor build
@@ -12,13 +15,15 @@ status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/mcm
 Status](https://img.shields.io/codecov/c/github/poissonconsulting/mcmcr/master.svg)](https://codecov.io/github/poissonconsulting/mcmcr?branch=master)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![status](https://tinyverse.netlify.com/badge/mcmcr)](https://CRAN.R-project.org/package=mcmcr)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mcmcr)](https://cran.r-project.org/package=mcmcr)
 ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/mcmcr)
+<!-- badges: end -->
 
 ## Introduction
 
 `mcmcr` is an R package to manipulate Monte Carlo Markov Chain (MCMC)
-samples.
+samples (Brooks et al. 2011).
 
 For the purposes of this discussion, an MCMC *sample* represents the
 value of a *term* from a single *iteration* of a single *chain*. While a
@@ -167,10 +172,17 @@ plot(mcmcr_example[["alpha"]])
 
 ## Installation
 
-To install the latest official release from
-[CRAN](https://CRAN.R-project.org/package=checkr)
+To install the latest release version from
+[CRAN](https://cran.r-project.org/package=mcmcr)
 
-    install.packages("checkr")
+    install.packages("mcmcr")
+
+To install the latest development version from
+[GitHub](https://github.com/poissonconsulting/mcmcr)
+
+    if(!"remotes" %in% installed.packages()[,1]) 
+      install.packages("remotes")
+    remotes::install_github("poissonconsulting/mcmcr")
 
 To install the latest development version from the Poisson drat
 [repository](https://github.com/poissonconsulting/drat)
@@ -179,15 +191,6 @@ To install the latest development version from the Poisson drat
       install.packages("drat")
     drat::addRepo("poissonconsulting")
     install.packages("mcmcr")
-
-To install the latest development version from
-[GitHub](https://github.com/poissonconsulting/checkr)
-
-    if(!"devtools" %in% installed.packages()[,1]) 
-      install.packages("devtools")
-    devtools::install_github("poissonconsulting/err")
-    devtools::install_github("poissonconsulting/checkr")
-    devtools::install_github("poissonconsulting/mcmcr")
 
 ## Contribution
 
@@ -198,10 +201,16 @@ Please report any
 always welcome.
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms
+Conduct](https://poissonconsulting.github.io/mcmcr/CONDUCT.html). By
+participating in this project you agree to abide by its terms.
 
 ## Inspiration
 
 [coda](https://github.com/cran/coda) and
 [rjags](https://github.com/cran/rjags)
+
+## References
+
+Brooks, S., Gelman, A., Jones, G.L., and Meng, X.-L. (Editors). 2011.
+Handbook for Markov Chain Monte Carlo. Taylor & Francis, Boca Raton.
+ISBN: 978-1-4200-7941-8.
