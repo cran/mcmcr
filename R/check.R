@@ -1,4 +1,4 @@
-#' Check mcmcarray
+#' \lifecycle{soft-deprecated} Check mcmcarray
 #'
 #' @param x The object to check.
 #' @param x_name A string of the name of the object.
@@ -10,17 +10,18 @@
 #' @examples
 #' check_mcmcarray(mcmcr::mcmcr_example$beta)
 check_mcmcarray <- function(x, x_name = substitute(x), error = TRUE) {
-  x_name <- chk_deparse(x_name)
-  check_string(x_name)
-  check_flag(error)
+  lifecycle::deprecate_soft("v0.2.1", "check_mcmcarray()", "chk_mcmcarray()")
+  x_name <- deparse_backtick_chk(x_name)
+  chk_string(x_name)
+  chk_flag(error)
 
-  check_inherits(x, "mcmcarray", x_name = x_name)
-  if(!is.array(x)) err(x_name, " must be an array")
-  if(anyNA(x)) err(x_name, " must not include missing values")
+  chk_s3_class(x, "mcmcarray", x_name = x_name)
+  if (!is.array(x)) abort_chk(x_name, " must be an array")
+  chk_not_any_na(x, x_name = x_name)
   invisible(x)
 }
 
-#' Check mcmcr
+#' \lifecycle{soft-deprecated} Check mcmcr
 #'
 #' @param x The object to check.
 #' @param sorted A flag specifying whether the parameters must be sorted.
@@ -33,15 +34,19 @@ check_mcmcarray <- function(x, x_name = substitute(x), error = TRUE) {
 #' @examples
 #' check_mcmcr(mcmcr::mcmcr_example)
 check_mcmcr <- function(x, sorted = FALSE, x_name = substitute(x), error = TRUE) {
-  x_name <- chk_deparse(x_name)
-  check_flag(sorted)
-  check_string(x_name)
-  check_flag(error)
+  lifecycle::deprecate_soft("v0.2.1", "check_mcmcr()", "chk_mcmcr()")
+  x_name <- deparse_backtick_chk(x_name)
+  chk_flag(sorted)
+  chk_string(x_name)
+  chk_flag(error)
 
-  check_inherits(x, "mcmcr", x_name = x_name)
-  check_named(x, unique = TRUE)
-  if(sorted) check_sorted(names(x), x_name = p0("names of ", x_name), error = error)
-  mapply(check_mcmcarray, x, x_name = p0("parameter '", parameters(x), "' of ", x_name),
-         MoreArgs = list(error = error))
+  chk_s3_class(x, "mcmcr", x_name = x_name)
+  chk_named(x)
+  chk_unique(names(x))
+  if (sorted) chk_sorted(names(x), x_name = p0("names of ", x_name))
+  mapply(check_mcmcarray, x,
+    x_name = p0(x_name, " parameter '", pars(x), "'"),
+    MoreArgs = list(error = error)
+  )
   invisible(x)
 }

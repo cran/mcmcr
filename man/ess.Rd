@@ -2,7 +2,8 @@
 % Please edit documentation in R/utils.R
 \name{ess}
 \alias{ess}
-\title{Effective Sample Size}
+\title{P-Value
+Effective Sample Size}
 \usage{
 ess(x, by = "all", as_df = FALSE)
 }
@@ -15,7 +16,7 @@ ess(x, by = "all", as_df = FALSE)
 data frame or list.}
 }
 \description{
-Calculates the effective sample size based on \code{\link{esr}}.
+Calculates the effective sample size based on \code{\link[=esr]{esr()}}.
 }
 \examples{
 ess(mcmcr_example)

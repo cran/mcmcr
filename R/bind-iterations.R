@@ -12,96 +12,102 @@ bind_iterations <- function(x, x2, ...) {
   UseMethod("bind_iterations")
 }
 
-#' @describeIn bind_iterations Binds two mcarray objects by their iterations
 #' @export
 bind_iterations.mcarray <- function(x, x2, ...) {
-  if (!is.mcarray(x2)) err("x2 must be an mcarray")
+  chk_s3_class(x2, "mcarray")
 
-  if (!identical(pdims(x), pdims(x2)))
-    err("x and x2 must have the same parameter dimensions")
+  if (!identical(pdims(x), pdims(x2))) {
+    abort_chk("`x` and `x2` must have the same parameter dimensions")
+  }
 
-  if (!identical(nchains(x), nchains(x2)))
-    err("x and x2 must have the same number of chains")
+  if (!identical(nchains(x), nchains(x2))) {
+    abort_chk("`x` and `x2` must have the same number of chains")
+  }
 
-  x <- abind(x, x2, along = ndims(x)-1)
+  x <- abind(x, x2, along = ndims(x) - 1)
   set_class(x, "mcarray")
 }
 
-#' @describeIn bind_iterations Binds two mcmc objects by their iterations
 #' @export
 bind_iterations.mcmc <- function(x, x2, ...) {
-  if (!coda::is.mcmc(x2)) err("x2 must be an mcmc")
+  chk_s3_class(x2, "mcmc")
 
   x <- sort(x)
   x2 <- sort(x2)
 
-  if (!identical(parameters(x), parameters(x2)))
-    err("x and x2 must have the same parameters")
+  if (!identical(pars(x), pars(x2))) {
+    abort_chk("`x` and `x2` must have the same parameters")
+  }
 
-  if (!identical(pdims(x), pdims(x2)))
-    err("x and x2 must have the same parameter dimensions")
+  if (!identical(pdims(x), pdims(x2))) {
+    abort_chk("`x` and `x2` must have the same parameter dimensions")
+  }
 
-  if (!identical(nchains(x), nchains(x2)))
-    err("x and x2 must have the same number of chains")
+  if (!identical(nchains(x), nchains(x2))) {
+    abort_chk("`x` and `x2` must have the same number of chains")
+  }
 
   x <- abind(x, x2, along = 1)
   as.mcmc(x)
 }
 
-#' @describeIn bind_iterations Binds two mcmc.list objects by their iterations
 #' @export
 bind_iterations.mcmc.list <- function(x, x2, ...) {
-  if (!(coda::is.mcmc.list(x2) || coda::is.mcmc(x2)))
-    err("x2 must be an mcmc.list")
+  chkor(chk_s3_class(x2, "mcmc.list"), chk_s3_class(x2, "mcmc"))
 
   x <- sort(x)
   x2 <- sort(x2)
 
-  if (!identical(parameters(x), parameters(x2)))
-    err("x and x2 must have the same parameters")
+  if (!identical(pars(x), pars(x2))) {
+    abort_chk("`x` and `x2` must have the same parameters")
+  }
 
-  if (!identical(pdims(x), pdims(x2)))
-    err("x and x2 must have the same parameter dimensions")
+  if (!identical(pdims(x), pdims(x2))) {
+    abort_chk("`x` and `x2` must have the same parameter dimensions")
+  }
 
-  if (!identical(nchains(x), nchains(x2)))
-    err("x and x2 must have the same number of chains")
+  if (!identical(nchains(x), nchains(x2))) {
+    abort_chk("`x` and `x2` must have the same number of chains")
+  }
 
   x <- mapply(x, x2, FUN = bind_iterations, SIMPLIFY = FALSE)
   set_class(x, "mcmc.list")
 }
 
-#' @describeIn bind_iterations Binds two mcmcarray objects by their iterations
 #' @export
 bind_iterations.mcmcarray <- function(x, x2, ...) {
+  chk_s3_class(x2, "mcmcarray")
 
-  if (!is.mcmcarray(x2)) err("x2 must be an mcmcarray")
+  if (!identical(pdims(x), pdims(x2))) {
+    abort_chk("`x` and `x2` must have the same parameter dimensions")
+  }
 
-  if (!identical(pdims(x), pdims(x2)))
-    err("x and x2 must have the same parameter dimensions")
-
-  if (!identical(nchains(x), nchains(x2)))
-    err("x and x2 must have the same number of chains")
+  if (!identical(nchains(x), nchains(x2))) {
+    abort_chk("`x` and `x2` must have the same number of chains")
+  }
 
   x <- abind(x, x2, along = 2, dimnames = FALSE)
   set_class(x, "mcmcarray")
 }
 
-#' @describeIn bind_iterations Binds two mcmcr objects by their iterations
 #' @export
 bind_iterations.mcmcr <- function(x, x2, ...) {
-  if (!is.mcmcr(x2)) err("x2 must be an mcmcr")
+  chk_s3_class(x2, "mcmcr")
 
   x <- sort(x)
   x2 <- sort(x2)
 
-  if (!identical(parameters(x), parameters(x2)))
-    err("x and x2 must have the same parameters")
+  if (!identical(pars(x), pars(x2))) {
+    abort_chk("`x` and `x2` must have the same parameters")
+  }
 
-  if (!identical(pdims(x), pdims(x2)))
-    err("x and x2 must have the same parameter dimensions")
+  if (!identical(pdims(x), pdims(x2))) {
+    abort_chk("`x` and `x2` must have the same parameter dimensions")
+  }
 
-  if (!identical(nchains(x), nchains(x2)))
-    err("x and x2 must have the same number of chains")
+  if (!identical(nchains(x), nchains(x2))) {
+    abort_chk("`x` and `x2` must have the same number of chains")
+  }
 
   x <- mapply(x, x2, FUN = bind_iterations, SIMPLIFY = FALSE)
   set_class(x, "mcmcr")

@@ -1,31 +1,35 @@
-#' Number of Parameters
-#'
-#' Gets the number of parameters for an object.
-#'
-#' @param x The object.
-#' @param ... Not used.
-#' @return A count of the number of parameters.
 #' @export
-#' @examples
-#' npars(mcmcr_example)
-npars <- function(x, ...) UseMethod("npars")
+universals::npars
 
-#' @describeIn npars Number of parameters for an object
+#' @inherit universals::npars
+#' @inheritParams params
 #' @export
-npars.default <- function(x, ...) length(parameters(x))
+npars.mcarray <- function(x, scalar = NULL, ...) {
+  chk_unused(...)
+  if (is.null(scalar)) {
+    return(1L)
+  }
+  length(pars(x, scalar = scalar))
+}
 
-#' @describeIn npars Number of parameters for an mcarray object
+#' @inherit universals::npars
+#' @inheritParams params
 #' @export
-npars.mcarray <- function(x, ...) 1L
+npars.mcmcarray <- function(x, scalar = NULL, ...) {
+  chk_unused(...)
+  if (is.null(scalar)) {
+    return(1L)
+  }
+  length(pars(x, scalar = scalar))
+}
 
-#' @describeIn npars Number of parameters for an mcmcarray object
+#' @inherit universals::npars
+#' @inheritParams params
 #' @export
-npars.mcmcarray <- function(x, ...) 1L
-
-#' @describeIn npars Number of parameters for an mcmcr object
-#' @export
-npars.mcmcr <- function(x, ...) length(x)
-
-#' @describeIn npars Number of parameters for an mcmcrs object
-#' @export
-npars.mcmcrs <- function(x, ...) npars(x[[1]])
+npars.mcmcr <- function(x, scalar = NULL, ...) {
+  chk_unused(...)
+  if (is.null(scalar)) {
+    return(length(x))
+  }
+  length(pars(x, scalar = scalar))
+}

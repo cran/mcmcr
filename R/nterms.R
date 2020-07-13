@@ -1,41 +1,22 @@
-#' Number of Terms
-#'
-#' Gets the number of terms for an object.
-#'
-#' @param x The object.
-#' @param ... Not used.
-#' @return A count of the number of terms.
 #' @export
-#' @examples
-#' nterms(mcmcr_example)
-nterms <- function(x, ...) {
-  UseMethod("nterms")
-}
+universals::nterms
 
-#' @describeIn nterms Number of terms for an object
+#' @inherit universals::nterms
 #' @export
-nterms.default <- function(x, ...) {
-  check_unused(...)
-  length(terms(x))
-}
+nterms.mcmc <- function(x, ...) ncol(x)
 
-#' @describeIn nterms Number of terms for an mcmcarray object
+#' @inherit universals::nterms
 #' @export
-nterms.mcmcarray <- function(x, ...) {
-  check_unused(...)
-  as.integer(prod(dim(x)[-(1:2)]))
-}
+nterms.mcmc.list <- function(x, ...) nterms(x[[1]])
 
-#' @describeIn nterms Number of terms for an mcmcr object
+#' @inherit universals::nterms
 #' @export
-nterms.mcmcr <- function(x, ...) {
-  check_unused(...)
-  sum(vapply(x, nterms, 1L))
-}
+nterms.mcmcarray <- function(x, ...) as.integer(prod(dim(x)[-(1:2)]))
 
-#' @describeIn nterms Number of terms for an mcmcrs object
+#' @inherit universals::nterms
 #' @export
-nterms.mcmcrs <- function(x, ...) {
-  check_unused(...)
-  nterms(x[[1]])
-}
+nterms.mcmcr <- function(x, ...) sum(vapply(x, nterms, 1L))
+
+#' @inherit universals::nterms
+#' @export
+nterms.mcmcrs <- function(x, ...) nterms(x[[1]])

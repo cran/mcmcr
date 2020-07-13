@@ -4,13 +4,15 @@
 \name{mcmcr_example}
 \alias{mcmcr_example}
 \title{An Example mcmcr Object}
-\format{An object of class \code{mcmcr} of length 3.}
+\format{
+An object of class \code{mcmcr} of length 3.
+}
 \usage{
 mcmcr_example
 }
 \description{
-An example \code{\link{mcmcr-object}}
-derived from on \code{coda::\link[coda]{line}}.
+An example \code{\link[=mcmcr-object]{mcmcr-object()}}
+derived from \verb{coda::[line][coda::line]}.
 }
 \examples{
 mcmcr_example

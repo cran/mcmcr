@@ -1,5 +1,3 @@
-context("mcmc-aperm")
-
 test_that("mcmc_aperm", {
   expect_identical(mcmc_aperm(mcmcr_example[[1]], perm = 1L), mcmcr_example[[1]])
   expect_identical(mcmc_aperm(mcmcr_example[[1]]), mcmcr_example[[1]])
@@ -14,13 +12,17 @@ test_that("mcmc_aperm with big one", {
 })
 
 test_that("mcmc_aperm.mcmc", {
-  expect_identical(mcmc_aperm(coda::as.mcmc(collapse_chains(mcmcr_example))),
-                   coda::as.mcmc(collapse_chains(mcmcr_example)))
+  expect_identical(
+    mcmc_aperm(coda::as.mcmc(collapse_chains(mcmcr_example))),
+    coda::as.mcmc(collapse_chains(mcmcr_example))
+  )
 })
 
 test_that("mcmc_aperm.mcmc.list", {
-  expect_identical(mcmc_aperm(coda::as.mcmc.list(mcmcr_example)),
-                   coda::as.mcmc.list(mcmcr_example))
+  expect_identical(
+    mcmc_aperm(coda::as.mcmc.list(mcmcr_example)),
+    coda::as.mcmc.list(mcmcr_example)
+  )
 })
 
 test_that("mcmc_aperm.mcmcr", {

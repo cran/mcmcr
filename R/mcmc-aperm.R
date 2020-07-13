@@ -13,49 +13,47 @@ mcmc_aperm <- function(x, perm, ...) {
   UseMethod("mcmc_aperm")
 }
 
-#' @describeIn mcmc_aperm Transpose an mcmcarray object
 #' @export
 mcmc_aperm.mcmcarray <- function(x, perm = NULL, ...) {
-  checkor(check_null(perm),
-          check_vector(perm, 1:npdims(x), only = TRUE, unique = TRUE))
-  check_unused(...)
+  if (!is.null(perm)) {
+    chk_whole_numeric(perm)
+    chk_range(perm, c(1, npdims(x)))
+    chk_unique(perm)
+  }
+  chk_unused(...)
 
   perm_all <- 1:npdims(x)
-  perm <- c(perm, if(!is.null(perm)) setdiff(perm_all, perm) else rev(perm_all))
+  perm <- c(perm, if (!is.null(perm)) setdiff(perm_all, perm) else rev(perm_all))
   perm <- c(1L, 2L, perm + 2L)
   x <- aperm(x, perm = perm)
   set_class(x, "mcmcarray")
 }
 
-#' @describeIn mcmc_aperm Transpose an mcmc object
 #' @export
 mcmc_aperm.mcmc <- function(x, perm = NULL, ...) {
-  check_unused(...)
+  chk_unused(...)
   x <- as.mcmcr(x)
   x <- mcmc_aperm(x, perm = perm)
   as.mcmc(x)
 }
 
-#' @describeIn mcmc_aperm Transpose an mcmc.list object
 #' @export
 mcmc_aperm.mcmc.list <- function(x, perm = NULL, ...) {
-  check_unused(...)
+  chk_unused(...)
   x <- lapply(x, mcmc_aperm, perm = perm)
   set_class(x, "mcmc.list")
 }
 
-#' @describeIn mcmc_aperm Transpose an mcmcr object
 #' @export
 mcmc_aperm.mcmcr <- function(x, perm = NULL, ...) {
-  check_unused(...)
+  chk_unused(...)
   x <- lapply(x, mcmc_aperm, perm = perm)
   set_class(x, "mcmcr")
 }
 
-#' @describeIn mcmc_aperm Transpose an mcmcrs object
 #' @export
 mcmc_aperm.mcmcrs <- function(x, perm = NULL, ...) {
-  check_unused(...)
+  chk_unused(...)
   x <- lapply(x, mcmc_aperm, perm = perm)
   set_class(x, "mcmcrs")
 }

@@ -6,9 +6,9 @@
 \alias{mcmcr-package}
 \title{mcmcr: Manipulate MCMC Samples}
 \description{
-Functions and classes to store, manipulate and summarise 
-   Monte Carlo Markov Chain (MCMC) samples. For more information see 
-   Brooks et al. (2011) <isbn:978-1-4200-7941-8>.
+Functions and classes to store, manipulate and
+    summarise Monte Carlo Markov Chain (MCMC) samples. For more
+    information see Brooks et al. (2011) <isbn:978-1-4200-7941-8>.
 }
 \seealso{
 Useful links:
@@ -19,7 +19,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Joe Thorley \email{joe@poissonconsulting.ca} (0000-0002-7683-4592)
+\strong{Maintainer}: Joe Thorley \email{joe@poissonconsulting.ca} (\href{https://orcid.org/0000-0002-7683-4592}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Poisson Consulting [copyright holder, funder]
+}
 
 }
 \keyword{internal}

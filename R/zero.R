@@ -6,30 +6,41 @@
 #' where the expected value is 0.
 #'
 #' @param x The MCMC object.
-#' @param parameters A character vector (or NULL) of the parameters to zero.
+#' @param pars A character vector (or NULL) of the pars to zero.
 #' @param ... Unused
+#' @return The MCMC
 #' @export
+#'
 #' @examples
-#' zero(mcmcr_example, parameters = "beta")
+#' zero(mcmcr_example, pars = "beta")
 zero <- function(x, ...) {
+  lifecycle::deprecate_soft("v0.2.1", "zero()", "fill_all()")
   UseMethod("zero")
 }
 
 #' @describeIn zero Zero an mcarray object
 #' @export
-zero.mcarray <- function(x, ...) set_class(array(0, dims(x)), "mcarray")
+zero.mcarray <- function(x, ...) {
+  fill_all(x)
+}
 
 #' @describeIn zero Zero an mcmcarray object
 #' @export
-zero.mcmcarray <- function(x, ...) set_class(array(0, dims(x)), "mcmcarray")
+zero.mcmcarray <- function(x, ...) {
+  fill_all(x)
+}
 
 #' @describeIn zero Zero an mcmcr object
 #' @export
-zero.mcmcr <- function(x, parameters = NULL, ...) {
-  checkor(check_null(parameters), check_vector(parameters, rep(parameters(x), 3), unique = TRUE))
+zero.mcmcr <- function(x, pars = NULL, ...) {
+  if (!is.null(pars)) {
+    chk_s3_class(pars, "character")
+    chk_subset(pars, pars(x))
+    chk_unique(pars)
+  } else {
+    pars <- pars(x)
+  }
 
-  if(is.null(parameters)) parameters <- parameters(x)
-
-  x[parameters] <- lapply(x[parameters], zero)
+  x[pars] <- lapply(x[pars], zero)
   set_class(x, "mcmcr")
 }

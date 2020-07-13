@@ -2,7 +2,6 @@
 % Please edit documentation in R/subset.R
 \name{subset}
 \alias{subset}
-\alias{subset.term}
 \alias{subset.mcmc}
 \alias{subset.mcmc.list}
 \alias{subset.mcmcarray}
@@ -10,39 +9,60 @@
 \alias{subset.mcmcrs}
 \title{Subset an MCMC Object}
 \usage{
-\method{subset}{term}(x, parameters = NULL, ...)
+\method{subset}{mcmc}(x, iters = NULL, pars = NULL, iterations = NULL, parameters = NULL, ...)
 
-\method{subset}{mcmc}(x, iterations = NULL, parameters = NULL, ...)
+\method{subset}{mcmc.list}(
+  x,
+  chains = NULL,
+  iters = NULL,
+  pars = NULL,
+  iterations = NULL,
+  parameters = NULL,
+  ...
+)
 
-\method{subset}{mcmc.list}(x, chains = NULL, iterations = NULL,
-  parameters = NULL, ...)
+\method{subset}{mcmcarray}(x, chains = NULL, iters = NULL, iterations = NULL, ...)
 
-\method{subset}{mcmcarray}(x, chains = NULL, iterations = NULL, ...)
+\method{subset}{mcmcr}(
+  x,
+  chains = NULL,
+  iters = NULL,
+  pars = NULL,
+  iterations = NULL,
+  parameters = NULL,
+  ...
+)
 
-\method{subset}{mcmcr}(x, chains = NULL, iterations = NULL,
-  parameters = NULL, ...)
-
-\method{subset}{mcmcrs}(x, chains = NULL, iterations = NULL,
-  parameters = NULL, ...)
+\method{subset}{mcmcrs}(
+  x,
+  chains = NULL,
+  iters = NULL,
+  pars = NULL,
+  iterations = NULL,
+  parameters = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{The MCMC object to subset}
 
-\item{parameters}{A character vector (or NULL) of the parameters to subset by.}
+\item{iters}{An integer vector of iterations.}
 
-\item{...}{Unused}
+\item{pars}{A character vector of parameter names.}
 
 \item{iterations}{An integer vector (or NULL) of the iterations to subset by.}
 
-\item{chains}{An integer vector (or NULL) of the chains to subset by.}
+\item{parameters}{A character vector (or NULL) of the parameters to subset by.}
+
+\item{...}{Unused.}
+
+\item{chains}{An integer vector of chains.}
 }
 \description{
 Subsets an MCMC object by its chains, iterations and/or parameters.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{term}: Subset a term vector
-
 \item \code{mcmc}: Subset an mcmc object
 
 \item \code{mcmc.list}: Subset an mcmc.list object
@@ -55,6 +75,8 @@ Subsets an MCMC object by its chains, iterations and/or parameters.
 }}
 
 \examples{
-subset(mcmcr_example, chains = 2L, iterations = 1:100,
-  parameters = c("beta", "alpha"))
+subset(mcmcr_example,
+  chains = 2L, iters = 1:100,
+  pars = c("beta", "alpha")
+)
 }

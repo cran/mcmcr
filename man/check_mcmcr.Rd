@@ -2,7 +2,7 @@
 % Please edit documentation in R/check.R
 \name{check_mcmcr}
 \alias{check_mcmcr}
-\title{Check mcmcr}
+\title{\lifecycle{soft-deprecated} Check mcmcr}
 \usage{
 check_mcmcr(x, sorted = FALSE, x_name = substitute(x), error = TRUE)
 }
@@ -19,7 +19,7 @@ check_mcmcr(x, sorted = FALSE, x_name = substitute(x), error = TRUE)
 An invisible copy of x (it if doesn't throw an error).
 }
 \description{
-Check mcmcr
+\lifecycle{soft-deprecated} Check mcmcr
 }
 \examples{
 check_mcmcr(mcmcr::mcmcr_example)

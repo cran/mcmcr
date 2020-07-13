@@ -1,29 +1,23 @@
-#' MCMC Object Terms
-#'
-#' Gets terms for an MCMC object.
-#'
-#' @param x A MCMC object.
-#' @param ... Unused
-#' @return A term vector.
 #' @export
-#' @seealso \code{stats::\link[stats]{terms}}
-#' @examples
-#' terms(mcmcr_example)
-#' @name terms
-NULL
+terms.mcmc <- function(x, ...) {
+  deprecate_soft("0.2.1", "terms()", "as_term()", id = "terms")
+  as_term(x)
+}
 
-#' @describeIn terms Get terms for an mcmc object
 #' @export
-terms.mcmc <- function(x, ...) as.term(x)
+terms.mcmc.list <- function(x, ...) {
+  deprecate_soft("0.2.1", "terms()", "as_term()", id = "terms")
+  as_term(x)
+}
 
-#' @describeIn terms Get terms for an mcmc.list object
 #' @export
-terms.mcmc.list <- function(x, ...) as.term(x)
+terms.mcmcarray <- function(x, ...) {
+  deprecate_soft("0.2.1", "terms()", "as_term()", id = "terms")
+  as_term(x)
+}
 
-#' @describeIn terms Get terms for an mcmcarray object
 #' @export
-terms.mcmcarray <- function(x, ...) as.term(x)
-
-#' @describeIn terms Get terms for an mcmcr object
-#' @export
-terms.mcmcr <- function(x, ...) as.term(x)
+terms.mcmcr <- function(x, ...) {
+  deprecate_soft("0.2.1", "terms()", "as_term()", id = "terms")
+  as_term(x)
+}

@@ -1,14 +1,3 @@
-#' Is Term
-#'
-#' Test whether an object is a term.
-#'
-#' @param x The object to test.
-#' @return A flag indicating whether the test was positive.
-#' @export
-#' @examples
-#' is.term(terms(mcmcr_example))
-is.term <- function(x) inherits(x, "term")
-
 #' Is mcarray Object
 #'
 #' Tests whether an object is an mcarray.
@@ -22,7 +11,7 @@ is.mcarray <- function(x) inherits(x, "mcarray")
 
 #' Is mcmcarray Object
 #'
-#' Tests whether an object is an \code{\link{mcmcarray-object}}.
+#' Tests whether an object is an [mcmcarray-object()].
 #'
 #' @param x The object to test.
 #' @return A flag indicating whether the test was positive.
@@ -33,7 +22,7 @@ is.mcmcarray <- function(x) inherits(x, "mcmcarray")
 
 #' Is mcmcr Object
 #'
-#' Tests whether an object is an \code{\link{mcmcr-object}}.
+#' Tests whether an object is an [mcmcr-object()].
 #'
 #' @param x The object to test.
 #' @return A flag indicating whether the test was positive.
@@ -44,11 +33,11 @@ is.mcmcr <- function(x) inherits(x, "mcmcr")
 
 #' Is mcmcrs Object
 #'
-#' Tests whether an object is an \code{\link{mcmcrs-object}}.
+#' Tests whether an object is an [mcmcrs-object()].
 #'
 #' @param x The object to test.
 #' @return A flag indicating whether the test was positive.
 #' @export
 #' @examples
 #' is.mcmcrs(mcmcrs(mcmcr_example))
-is.mcmcrs <- function(x)  inherits(x, "mcmcrs")
+is.mcmcrs <- function(x) inherits(x, "mcmcrs")

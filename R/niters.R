@@ -1,42 +1,28 @@
-#' Number of MCMC samples
-#'
-#' Gets the number of MCMC iterations (in a chain).
-#'
-#' @param x The object
-#' @param ... Unused.
-#' @return A count indicating the number of MCMC iterations.
 #' @export
-#' @examples
-#' niters(mcmcr_example)
-niters <- function(x, ...) {
-  UseMethod("niters")
-}
+universals::niters
 
 niters.matrix <- function(x, ...) ncol(x)
 
-#' @describeIn nchains Number of MCMC iterations for an mcarray object
+#' @inherit universals::niters
 #' @export
 niters.mcarray <- function(x, ...) unname(dim(x)[ndims(x) - 1])
 
-#' @describeIn nchains Number of MCMC iterations for an mcmc object
+#' @inherit universals::niters
 #' @export
-niters.mcmc <- function(x, ...) {
-  if (is.matrix(x)) return(nrow(x))
-  length(x)
-}
+niters.mcmc <- function(x, ...) nrow(x)
 
-#' @describeIn nchains Number of MCMC iterations for an mcmc.list object
+#' @inherit universals::niters
 #' @export
 niters.mcmc.list <- function(x, ...) niters(x[[1]])
 
-#' @describeIn nchains Number of MCMC iterations for an mcmcarray object
+#' @inherit universals::niters
 #' @export
 niters.mcmcarray <- function(x, ...) dim(x)[2]
 
-#' @describeIn nchains Number of MCMC iterations for an mcmcr object
+#' @inherit universals::niters
 #' @export
 niters.mcmcr <- function(x, ...) niters(x[[1]])
 
-#' @describeIn nchains Number of MCMC iterations for an mcmcrs object
+#' @inherit universals::niters
 #' @export
 niters.mcmcrs <- function(x, ...) niters(x[[1]])

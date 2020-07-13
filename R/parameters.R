@@ -1,122 +1,69 @@
 #' Parameter Names
 #'
-#' Gets or sets the parameter names for an object.
+#' Gets the parameter names.
 #'
-#' @param x An MCMC object.
-#' @param scalar_only A flag indicating whether to only get the names of
-#' parameters with one term.
-#' @param terms A flag indicating whether to return the parameter name
-#' for each term.
-#' @param ... Not used.
-#' @param value A character vector of the new parameter names.
-#' @param parameters A character vector of the new parameter names.
-#' @return A character vector of the parameter names.
+#' \lifecycle{soft-deprecated} for pars()
+#'
+#' @inheritParams params
+#' @return A character vector of the names of the parameters.
 #' @export
-#' @examples
-#' parameters(mcmcr_example)
-#' parameters(mcmcr_example) <- c("gamma", "theta", "tau")
-#' parameters(mcmcr_example)
-#' parameters(mcmcr_example, scalar_only = TRUE)
-#' parameters(mcmcr_example, terms = TRUE)
-parameters <- function(x, ...) UseMethod("parameters")
-
-#' @rdname parameters
-#' @export
-`parameters<-` <- function(x, value) UseMethod("parameters<-", x)
-
-#' @rdname parameters
-set_parameters <- function(x, parameters) {
-  parameters(x) <- parameters
-  x
+parameters <- function(x, ...) {
+  UseMethod("parameters")
 }
 
-#' @describeIn parameters Parameter names for a term vector
+#' @describeIn parameters Parameters mcmc
 #' @export
-parameters.term <- function(x, scalar_only = FALSE, terms = FALSE, ...) {
-  check_flag(scalar_only)
-  check_flag(terms)
-  check_unused(...)
+parameters.mcmc <- function(x, scalar = NULL, terms = FALSE, ...) {
+  deprecate_soft("0.2.1", "parameters()", "pars()", id = "parameters")
 
-  x <- as.character(x)
-  if(scalar_only) x <- x[!grepl("\\[", x)]
-  x <- sub("^(\\w+)(.*)", "\\1", x)
-  if(!terms) x <- unique(x)
-  x
-}
+  if (!is.null(scalar)) chk_flag(scalar)
+  chk_flag(terms)
+  chk_unused(...)
 
-#' @describeIn parameters Parameter names for an mcmc object
-#' @export
-parameters.mcmc <- function(x, scalar_only = FALSE, terms = FALSE, ...) {
-  check_unused(...)
-  parameters(as.term(x), scalar_only = scalar_only, terms = terms)
-}
-
-#' @describeIn parameters Parameter names for an mcmc.list object
-#' @export
-parameters.mcmc.list <- function(x, scalar_only = FALSE, terms = FALSE, ...) {
-  check_unused(...)
-  parameters(x[[1]], scalar_only = scalar_only, terms = terms)
-}
-#' @describeIn parameters Parameter names for an mcmcr object
-#' @export
-parameters.mcmcr <- function(x, scalar_only = FALSE, terms = FALSE, ...) {
-  check_unused(...)
-  if(!scalar_only && !terms) return(names(x))
-  parameters(as.term(x), scalar_only = scalar_only, terms = terms)
-}
-
-#' @describeIn parameters Parameter names for an mcmcrs object
-#' @export
-parameters.mcmcrs <- function(x, scalar_only = FALSE, terms = FALSE, ...) {
-  check_unused(...)
-  parameters(x[[1]], scalar_only = scalar_only, terms = terms)
-}
-
-#' @export
-`parameters<-.character` <- function(x, value) {
-  x <- as.term(x)
-  parameters(x) <- value
-  as.character(x)
-}
-
-#' @export
-`parameters<-.term` <- function(x, value) {
-  check_vector(value, "", length = npars(x), unique = TRUE)
-
-  parameters <- parameters(x)
-  terms <- x
-
-  for(i in seq_along(value)) {
-    which <- which(grepl(parameters[i], terms, fixed = TRUE))
-    x[which] <- sub(parameters[i], value[i], x[which], fixed = TRUE)
+  if (terms) {
+    deprecate_soft("0.2.1", "mcmcr::pars(terms =)", details = "If `terms = TRUE` use `terms::pars_terms(as_term(x)) otherwise replace `pars(x, terms = FALSE)` with `pars(x)`.", id = "pars_terms")
   }
-  x
+  x <- as_term(x)
+  pars(x, scalar = scalar, terms = terms)
 }
 
+#' @describeIn parameters Parameters mcmc.list
 #' @export
-`parameters<-.mcmc` <- function(x, value) {
-  terms <- set_parameters(terms(x), value)
-  colnames(x) <- as.character(terms)
-  x
+parameters.mcmc.list <- function(x, scalar = NULL, terms = FALSE, ...) {
+  deprecate_soft("0.2.1", "parameters()", "pars()", id = "parameters")
+  pars(x[[1]], scalar = scalar, terms = terms, ...)
 }
 
+#' @describeIn parameters Parameters mcmcr
 #' @export
-`parameters<-.mcmc.list` <- function(x, value) {
-  x <- lapply(x, set_parameters, parameters = value)
-  class(x) <- "mcmc.list"
-  x
+parameters.mcmcr <- function(x, scalar = NULL, terms = FALSE, ...) {
+  deprecate_soft("0.2.1", "parameters()", "pars()", id = "parameters")
+  if (!is.null(scalar)) chk_flag(scalar)
+  chk_flag(terms)
+  chk_unused(...)
+
+  if (terms) {
+    deprecate_soft("0.2.1", "mcmcr::pars(terms =)", details = "If `terms = TRUE` use `terms::pars_terms(as_term(x)) otherwise replace `pars(x, terms = FALSE)` with `pars(x)`.", id = "pars_terms")
+  }
+
+  if (is.null(scalar) && !terms) {
+    return(names(x))
+  }
+  x <- as_term(x)
+  pars(x, scalar = scalar, terms = terms)
 }
 
+#' @describeIn parameters Parameters mcmcrs
 #' @export
-`parameters<-.mcmcr` <- function(x, value) {
-  check_vector(value, "", length = length(x), unique = TRUE)
-  names(x) <- value
-  x
+parameters.mcmcrs <- function(x, scalar = NULL, terms = FALSE, ...) {
+  deprecate_soft("0.2.1", "parameters()", "pars()", id = "parameters")
+  pars(x[[1]], scalar = scalar, terms = terms, ...)
 }
 
+
 #' @export
-`parameters<-.mcmcrs` <- function(x, value) {
-  x <- lapply(x, `parameters<-`, value)
-  class(x) <- "mcmcrs"
+`parameters<-` <- function(x, value, ...) {
+  deprecate_soft("0.2.1", "parameters()", "pars()", id = "parameters")
+  pars(x) <- value
   x
 }

@@ -3,92 +3,159 @@
 #' Subsets an MCMC object by its chains, iterations and/or parameters.
 #'
 #' @param x The MCMC object to subset
-#' @param chains An integer vector (or NULL) of the chains to subset by.
-#' @param iterations An integer vector (or NULL) of the iterations to subset by.
-#' @param parameters A character vector (or NULL) of the parameters to subset by.
-#' @param ... Unused
+#' @inheritParams nlist::subset.nlists
+#' @inheritParams params
 #' @name subset
 #' @examples
-#' subset(mcmcr_example, chains = 2L, iterations = 1:100,
-#'   parameters = c("beta", "alpha"))
+#' subset(mcmcr_example,
+#'   chains = 2L, iters = 1:100,
+#'   pars = c("beta", "alpha")
+#' )
 NULL
 
-#' @describeIn subset Subset a term vector
-#' @export
-subset.term <- function(x, parameters = NULL, ...) {
-  checkor(check_null(parameters),
-          check_vector(parameters, parameters(x), unique = TRUE))
-  check_unused(...)
-
-  if(!is.null(parameters)) {
-    parameters <- paste0("(^", parameters, ("($|\\[))"))
-    parameters <- paste0(parameters, collapse = ")|(")
-    parameters <- paste0("(", parameters, ")", collapse = "")
-    x <- x[grepl(parameters, x)]
-  }
-  x
-}
 
 #' @describeIn subset Subset an mcmc object
 #' @export
-subset.mcmc <- function(x, iterations = NULL, parameters = NULL, ...) {
-  checkor(check_null(iterations), check_vector(iterations, c(1L,niters(x))))
-  checkor(check_null(parameters),
-          check_vector(parameters, parameters(x), unique = TRUE))
-  check_unused(...)
+subset.mcmc <- function(x, iters = NULL, pars = NULL,
+                        iterations = NULL, parameters = NULL, ...) {
+  if (!missing(iterations)) {
+    deprecate_soft("0.2.1", "subset(iterations = )", "subset(iters = )",
+      id = "subset_iterations"
+    )
+    iters <- iterations
+  }
+  if (!missing(parameters)) {
+    deprecate_soft("0.2.1", "subset(parameters = )", "subset(pars = )",
+      id = "subset_parameters"
+    )
+    pars <- parameters
+  }
+  if (!is.null(iters)) {
+    chk_whole_numeric(iters)
+    chk_range(iters, c(1L, niters(x)))
+  }
+  if (!is.null(pars)) {
+    chk_s3_class(pars, "character")
+    chk_not_any_na(pars)
+    chk_unique(pars)
+    chk_subset(pars, pars(x))
+  }
+  chk_unused(...)
 
-  if (!is.null(parameters)) x <- x[,parameters(x, term = TRUE) %in% parameters,drop = FALSE]
-  if (!is.null(iterations)) x <- x[iterations,,drop = FALSE]
+  if (!is.null(pars)) x <- x[, pars_terms(as_term(x)) %in% pars, drop = FALSE]
+  if (!is.null(iters)) x <- x[iters, , drop = FALSE]
   class(x) <- "mcmc"
   x
 }
 
 #' @describeIn subset Subset an mcmc.list object
 #' @export
-subset.mcmc.list <- function(x, chains = NULL, iterations = NULL, parameters = NULL, ...) {
-  checkor(check_null(chains), check_vector(chains, c(1L,nchains(x))))
-  check_unused(...)
+subset.mcmc.list <- function(x, chains = NULL, iters = NULL, pars = NULL,
+                             iterations = NULL, parameters = NULL, ...) {
+  if (!missing(iterations)) {
+    deprecate_soft("0.2.1", "subset(iterations = )", "subset(iters = )",
+      id = "subset_iterations"
+    )
+    iters <- iterations
+  }
+  if (!missing(parameters)) {
+    deprecate_soft("0.2.1", "subset(parameters = )", "subset(pars = )",
+      id = "subset_parameters"
+    )
+    pars <- parameters
+  }
+  if (!is.null(chains)) {
+    chk_whole_numeric(chains)
+    chk_not_any_na(chains)
+    chk_range(chains, c(1L, nchains(x)))
+  }
+  chk_unused(...)
 
-  if(!is.null(chains))
+  if (!is.null(chains)) {
     x <- x[chains]
-  x <- lapply(x, subset, iterations = iterations, parameters = parameters)
+  }
+  x <- lapply(x, subset, iters = iters, pars = pars)
   class(x) <- "mcmc.list"
   x
 }
 
 #' @describeIn subset Subset an mcmcarray object
 #' @export
-subset.mcmcarray <- function(x, chains = NULL, iterations = NULL, ...) {
-  checkor(check_null(chains), check_vector(chains, c(1L,nchains(x))))
-  checkor(check_null(iterations), check_vector(iterations, c(1L,niters(x))))
-  check_unused(...)
+subset.mcmcarray <- function(x, chains = NULL, iters = NULL,
+                             iterations = NULL, ...) {
+  if (!missing(iterations)) {
+    deprecate_soft("0.2.1", "subset(iterations = )", "subset(iters = )",
+      id = "subset_iterations"
+    )
+    iters <- iterations
+  }
+  if (!is.null(chains)) {
+    chk_whole_numeric(chains)
+    chk_not_any_na(chains)
+    chk_range(chains, c(1L, nchains(x)))
+  }
+  if (!is.null(iters)) {
+    chk_whole_numeric(iters)
+    chk_not_any_na(iters)
+    chk_range(iters, c(1L, niters(x)))
+  }
+  chk_unused(...)
 
   if (!is.null(chains)) x <- abind::asub(x, chains, 1L, drop = FALSE)
-  if (!is.null(iterations)) x <- abind::asub(x, iterations, 2L, drop = FALSE)
+  if (!is.null(iters)) x <- abind::asub(x, iters, 2L, drop = FALSE)
   class(x) <- "mcmcarray"
   x
 }
 
 #' @describeIn subset Subset an mcmcr object
 #' @export
-subset.mcmcr <- function(x, chains = NULL, iterations = NULL, parameters = NULL, ...) {
-  checkor(check_null(parameters),
-          check_vector(parameters, parameters(x), unique = TRUE))
-  check_unused(...)
+subset.mcmcr <- function(x, chains = NULL, iters = NULL, pars = NULL,
+                         iterations = NULL, parameters = NULL, ...) {
+  if (!missing(iterations)) {
+    deprecate_soft("0.2.1", "subset(iterations = )", "subset(iters = )",
+      id = "subset_iterations"
+    )
+    iters <- iterations
+  }
+  if (!missing(parameters)) {
+    deprecate_soft("0.2.1", "subset(parameters = )", "subset(pars = )",
+      id = "subset_parameters"
+    )
+    pars <- parameters
+  }
+  if (!is.null(pars)) {
+    chk_s3_class(pars, "character")
+    chk_subset(pars, pars(x))
+    chk_unique(pars)
+  }
+  chk_unused(...)
 
-  if (!is.null(parameters)) x <- x[parameters]
+  if (!is.null(pars)) x <- x[pars]
 
-  x <- lapply(x, subset, chains = chains, iterations = iterations)
+  x <- lapply(x, subset, chains = chains, iters = iters)
   class(x) <- "mcmcr"
   x
 }
 
 #' @describeIn subset Subset an mcmcrs object
 #' @export
-subset.mcmcrs <- function(x, chains = NULL, iterations = NULL, parameters = NULL, ...) {
-  check_unused(...)
+subset.mcmcrs <- function(x, chains = NULL, iters = NULL, pars = NULL,
+                          iterations = NULL, parameters = NULL, ...) {
+  if (!missing(iterations)) {
+    deprecate_soft("0.2.1", "subset(iterations = )", "subset(iters = )",
+      id = "subset_iterations"
+    )
+    iters <- iterations
+  }
+  if (!missing(parameters)) {
+    deprecate_soft("0.2.1", "subset(parameters = )", "subset(pars = )",
+      id = "subset_parameters"
+    )
+    pars <- parameters
+  }
+  chk_unused(...)
 
-  x <- lapply(x, FUN = subset, chains = chains, iterations = iterations, parameters = parameters)
+  x <- lapply(x, FUN = subset, chains = chains, iters = iters, pars = pars)
   class(x) <- "mcmcrs"
   x
 }

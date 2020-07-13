@@ -1,6 +1,6 @@
 #' Combine Samples by Dimensions
 #'
-#' Combines MCMC object samples by dimensions along \code{along} using \code{fun}.
+#' Combines MCMC object samples by dimensions along `along` using `fun`.
 #'
 #' @param x An MCMC object
 #' @param fun The function to use when combining dimensions
@@ -14,50 +14,63 @@ combine_dimensions <- function(x, fun = mean, along = NULL, ...) {
   UseMethod("combine_dimensions")
 }
 
-#' @describeIn combine_dimensions Combine an mcmcarray object's samples by dimensions
 #' @export
 combine_dimensions.mcmcarray <- function(x, fun = mean, along = NULL, ...) {
-  check_function(fun)
-  checkor(check_null(along), check_vector(along, c(1L, length(pdims(x))), length = 1))
-  check_unused(...)
+  chk_function(fun)
+  if (!is.null(along)) {
+    chk_whole_number(along)
+    chk_not_any_na(along)
+    chk_range(along, c(1L, length(pdims(x))))
+  }
+  chk_unused(...)
 
   pdims <- pdims(x)
-  if(is.null(along)) along <- length(pdims)
+  if (is.null(along)) along <- length(pdims)
 
   n <- 1:length(pdims)
   n <- n[-along]
-  if(length(pdims) > 1) {
+  if (length(pdims) > 1) {
     pdims <- pdims[-along]
-  } else
+  } else {
     pdims <- 1L
+  }
   dim <- c(nchains(x), niters(x), pdims)
   x <- apply(x, c(1L, 2L, n + 2L), fun)
   dim(x) <- dim
   x <- set_class(x, "mcmcarray")
 
-  if(!identical(pdims(x), pdims)) err("function fun must return a scalar")
+  if (!identical(pdims(x), pdims)) abort_chk("`fun` must return a scalar")
   x
 }
 
-#' @describeIn combine_dimensions Combine an mcmcr object's samples by dimensions
 #' @export
 combine_dimensions.mcmcr <- function(x, fun = mean, along = NULL, ...) {
-  check_function(fun)
-  check_unused(...)
+  chk_function(fun)
+  chk_unused(...)
 
   pdims <- pdims(x)
   lengths <- vapply(pdims, length, 1L)
 
-  checkor(check_null(along),
-          check_vector(along, c(1L, min(lengths)), length = 1L),
-          check_vector(along, c(1L, max(lengths)), length = length(x)))
+  if (!is.null(along)) {
+    chk_whole_numeric(along)
+    chk_not_any_na(along)
+    chk_identical(length(along), c(1L, length(x)))
+    if (length(along) == 1L) {
+      chk_range(along, c(1L, min(lengths)))
+    } else {
+      chk_range(along, c(1L, max(lengths)))
+    }
+  }
 
-  if(is.null(along)) {
+  if (is.null(along)) {
     along <- lengths
-  } else if(identical(length(along), 1L))
+  } else if (identical(length(along), 1L)) {
     along <- rep(along, length(pdims))
+  }
 
-  x <- mapply(FUN = combine_dimensions, x = x, along = along, MoreArgs = list(fun = fun),
-              SIMPLIFY = FALSE)
+  x <- mapply(
+    FUN = combine_dimensions, x = x, along = along, MoreArgs = list(fun = fun),
+    SIMPLIFY = FALSE
+  )
   set_class(x, "mcmcr")
 }
