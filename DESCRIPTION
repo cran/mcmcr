@@ -1,6 +1,6 @@
 Package: mcmcr
 Title: Manipulate MCMC Samples
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: 
     c(person(given = "Joe",
              family = "Thorley",
@@ -23,11 +23,11 @@ RdMacros: lifecycle
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-07-13 16:33:39 UTC; joe
+Packaged: 2020-09-27 01:57:13 UTC; joe
 Author: Joe Thorley [aut, cre] (<https://orcid.org/0000-0002-7683-4592>),
   Poisson Consulting [cph, fnd]
 Maintainer: Joe Thorley <joe@poissonconsulting.ca>
 Repository: CRAN
-Date/Publication: 2020-07-13 18:10:02 UTC
+Date/Publication: 2020-09-27 04:40:03 UTC
