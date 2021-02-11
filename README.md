@@ -6,14 +6,12 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R build
-status](https://github.com/poissonconsulting/mcmcr/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/mcmcr/actions)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/poissonconsulting/mcmcr/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/mcmcr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/poissonconsulting/mcmcr/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/mcmcr?branch=master)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![status](https://tinyverse.netlify.com/badge/mcmcr)](https://CRAN.R-project.org/package=mcmcr)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mcmcr)](https://cran.r-project.org/package=mcmcr)
 ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/mcmcr)
 <!-- badges: end -->
@@ -161,15 +159,15 @@ mcmcr_example
 #> nchains:  2 
 #> niters:  400
 
-coef(mcmcr_example)
-#>        term  estimate        sd   zscore     lower    upper      pvalue
-#> 1  alpha[1] 3.7180250 0.9007167 4.149545 2.2120540 5.232403 0.001248439
-#> 2  alpha[2] 4.7180250 0.9007167 5.259772 3.2120540 6.232403 0.001248439
-#> 3 beta[1,1] 0.9716535 0.3747971 2.572555 0.2514796 1.713996 0.023720350
-#> 4 beta[2,1] 1.9716535 0.3747971 5.240666 1.2514796 2.713996 0.006242197
-#> 5 beta[1,2] 1.9716535 0.3747971 5.240666 1.2514796 2.713996 0.006242197
-#> 6 beta[2,2] 2.9716535 0.3747971 7.908776 2.2514796 3.713996 0.001248439
-#> 7     sigma 0.7911975 0.7408373 1.306700 0.4249618 2.559520 0.001248439
+coef(mcmcr_example, simplify = TRUE)
+#>        term  estimate     lower    upper   svalue
+#> 1  alpha[1] 3.7180250 2.2120540 5.232403 9.645658
+#> 2  alpha[2] 4.7180250 3.2120540 6.232403 9.645658
+#> 3 beta[1,1] 0.9716535 0.2514796 1.713996 5.397731
+#> 4 beta[2,1] 1.9716535 1.2514796 2.713996 7.323730
+#> 5 beta[1,2] 1.9716535 1.2514796 2.713996 7.323730
+#> 6 beta[2,2] 2.9716535 2.2514796 3.713996 9.645658
+#> 7     sigma 0.7911975 0.4249618 2.559520 9.645658
 rhat(mcmcr_example, by = "term")
 #> $alpha
 #> [1] 2.002 2.002

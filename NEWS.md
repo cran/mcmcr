@@ -1,3 +1,11 @@
+# mcmcr 0.5.0
+
+- Added 
+  - `tidy.mcmcr()`.
+  - `simplify = FALSE` argument to `coef()` and `tidy()` and soft-deprecated if not `TRUE`.
+  - `...` optional arguments for `fun = median` argument to `estimates()`.
+- Moved `as_nlists.mcmc.list()` to nlist package.
+
 # mcmcr 0.4.0
 
 - Added `as_mcmc_list.mcmr()`.
