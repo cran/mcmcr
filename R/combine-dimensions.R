@@ -1,11 +1,12 @@
-#' Combine Samples by Dimensions
+#' Combine samples by dimensions
 #'
 #' Combines MCMC object samples by dimensions along `along` using `fun`.
 #'
+#' @inheritParams params
 #' @param x An MCMC object
 #' @param fun The function to use when combining dimensions
 #' @param along A positive integer (or NULL) indicating the parameter dimension(s) to bind along.
-#' @param ... Unused
+#' @family combine
 #' @return The MCMC object with reduced dimensions.
 #' @export
 #' @examples

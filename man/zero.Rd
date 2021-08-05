@@ -5,7 +5,7 @@
 \alias{zero.mcarray}
 \alias{zero.mcmcarray}
 \alias{zero.mcmcr}
-\title{Zero MCMC Sample Values}
+\title{Zero MCMC sample values}
 \usage{
 zero(x, ...)
 
@@ -18,7 +18,7 @@ zero(x, ...)
 \arguments{
 \item{x}{The MCMC object.}
 
-\item{...}{Unused}
+\item{...}{Unused.}
 
 \item{pars}{A character vector (or NULL) of the pars to zero.}
 }

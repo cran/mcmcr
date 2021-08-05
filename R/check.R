@@ -1,10 +1,9 @@
 #' \lifecycle{soft-deprecated} Check mcmcarray
 #'
+#' @inheritParams params
 #' @param x The object to check.
-#' @param x_name A string of the name of the object.
-#' @param error A flag indicating whether to throw an informative error or immediately generate an informative message if the check fails.
-#'
 #' @return An invisible copy of x (it if doesn't throw an error).
+#' @seealso [check_mcmcr()]
 #' @export
 #'
 #' @examples
@@ -23,12 +22,10 @@ check_mcmcarray <- function(x, x_name = substitute(x), error = TRUE) {
 
 #' \lifecycle{soft-deprecated} Check mcmcr
 #'
+#' @inheritParams params
 #' @param x The object to check.
-#' @param sorted A flag specifying whether the parameters must be sorted.
-#' @param x_name A string of the name of the object.
-#' @param error A flag indicating whether to throw an informative error or immediately generate an informative message if the check fails.
-#'
 #' @return An invisible copy of x (it if doesn't throw an error).
+#' @seealso [check_mcmcr()]
 #' @export
 #'
 #' @examples

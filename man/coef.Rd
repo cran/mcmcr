@@ -3,7 +3,7 @@
 \name{coef}
 \alias{coef}
 \alias{coef.mcmc}
-\title{Term Coefficients}
+\title{Term coefficients}
 \usage{
 \method{coef}{mcmc}(object, conf_level = 0.95, estimate = median, simplify = FALSE, ...)
 }
@@ -16,7 +16,7 @@
 
 \item{simplify}{A flag specifying whether to return just the estimate, lower, upper and svalue.}
 
-\item{...}{Unused}
+\item{...}{Unused.}
 }
 \value{
 An data frame of the coefficients with the columns indicating the
@@ -35,5 +35,5 @@ Gets coefficients for all the terms in an MCMC object.
 coef(mcmcr_example)
 }
 \seealso{
-\verb{stats::[coef][stats::coef]}
+\link[stats:coef]{stats::coef}
 }

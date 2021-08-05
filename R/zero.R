@@ -1,13 +1,12 @@
-#' Zero MCMC Sample Values
+#' Zero MCMC sample values
 #'
 #' Zeros an MCMC object's sample values.
 #'
 #' It is used for removing the effect of a random effect
 #' where the expected value is 0.
 #'
+#' @inheritParams params
 #' @param x The MCMC object.
-#' @param pars A character vector (or NULL) of the pars to zero.
-#' @param ... Unused
 #' @return The MCMC
 #' @export
 #'

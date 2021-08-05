@@ -2,7 +2,7 @@
 % Please edit documentation in R/combine-dimensions.R
 \name{combine_dimensions}
 \alias{combine_dimensions}
-\title{Combine Samples by Dimensions}
+\title{Combine samples by dimensions}
 \usage{
 combine_dimensions(x, fun = mean, along = NULL, ...)
 }
@@ -13,7 +13,7 @@ combine_dimensions(x, fun = mean, along = NULL, ...)
 
 \item{along}{A positive integer (or NULL) indicating the parameter dimension(s) to bind along.}
 
-\item{...}{Unused}
+\item{...}{Unused.}
 }
 \value{
 The MCMC object with reduced dimensions.
@@ -24,3 +24,9 @@ Combines MCMC object samples by dimensions along \code{along} using \code{fun}.
 \examples{
 combine_dimensions(mcmcr_example$alpha)
 }
+\seealso{
+Other combine: 
+\code{\link{combine_samples_n}()},
+\code{\link{combine_samples}()}
+}
+\concept{combine}

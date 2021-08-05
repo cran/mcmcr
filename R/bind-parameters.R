@@ -2,9 +2,10 @@
 #'
 #' Combines two MCMC objects (with the same chains and iterations) by their parameters.
 #'
+#' @inheritParams params
 #' @param x an MCMC object
-#' @param x2 a second MCMC object
-#' @param ... unused
+#' @seealso [universals::bind_chains()]
+#' @family bind
 #' @export
 #' @examples
 #' bind_parameters(

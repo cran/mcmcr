@@ -9,9 +9,9 @@ bind_parameters(x, x2, ...)
 \arguments{
 \item{x}{an MCMC object}
 
-\item{x2}{a second MCMC object}
+\item{x2}{a second MCMC object.}
 
-\item{...}{unused}
+\item{...}{Unused.}
 }
 \description{
 Combines two MCMC objects (with the same chains and iterations) by their parameters.
@@ -22,3 +22,11 @@ bind_parameters(
   subset(mcmcr_example, pars = "beta")
 )
 }
+\seealso{
+\code{\link[universals:bind_chains]{universals::bind_chains()}}
+
+Other bind: 
+\code{\link{bind_dimensions_n}()},
+\code{\link{bind_dimensions}()}
+}
+\concept{bind}

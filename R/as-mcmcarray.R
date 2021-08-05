@@ -2,8 +2,9 @@
 #'
 #' Coerces MCMC objects to an [mcmcarray-object()].
 #'
+#' @inheritParams params
 #' @param x object to coerce.
-#' @param ... Unused.
+#' @family coerce
 #' @export
 #' @examples
 #' as.mcmcarray(as.mcarray(mcmcr_example$beta))
@@ -31,7 +32,11 @@ as.mcmcarray.mcmc <- function(x, ...) {
   if (npars(x) != 1) abort_chk("`x` must only have 1 parameter")
 
   x <- complete_terms(x)
-  x <- array(data = as.vector(x), dim = c(1, niters(x), pdims(x)[[1]]))
+  if(nterms(x)) {
+    x <- array(data = as.vector(x), dim = c(1, niters(x), pdims(x)[[1]]))
+  } else {
+    x <- array(data = as.vector(x), dim = c(1, niters(x), 0))
+  }
 
   set_class(x, "mcmcarray")
 }

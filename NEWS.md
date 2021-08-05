@@ -1,3 +1,10 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# mcmcr 0.6.0
+
+- Added `fill_na()` for `mcarray`, `mcmcarray` and `mcmcr`.
+- Fixed `as.mcmcarray.mcmc()` (and `as.mcmcr.mcmc()`) so now returns an `mcmcarray` (and `mcmcr`) object with no terms.
+
 # mcmcr 0.5.0
 
 - Added 
