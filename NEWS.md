@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# mcmcr 0.6.1
+
+- Update testing to testthat 3.
+
 # mcmcr 0.6.0
 
 - Added `fill_na()` for `mcarray`, `mcmcarray` and `mcmcr`.

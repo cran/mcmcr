@@ -1,6 +1,6 @@
 Package: mcmcr
 Title: Manipulate MCMC Samples
-Version: 0.6.0
+Version: 0.6.1
 Authors@R: 
     c(person(given = "Joe",
              family = "Thorley",
@@ -16,18 +16,19 @@ License: MIT + file LICENSE
 URL: https://github.com/poissonconsulting/mcmcr
 BugReports: https://github.com/poissonconsulting/mcmcr/issues
 Depends: R (>= 3.5)
-Imports: abind, chk, coda, extras, generics, lifecycle, nlist, purrr,
-        stats, term, universals, utils
-Suggests: covr, graphics, rlang, testthat, tibble
+Imports: abind, chk (>= 0.7.0), coda, extras, generics, lifecycle,
+        nlist, purrr, stats, term, universals, utils
+Suggests: covr, graphics, readr, rlang, testthat, tibble
 RdMacros: lifecycle
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-08-05 17:40:56 UTC; joe
+Packaged: 2021-09-06 17:10:35 UTC; joe
 Author: Joe Thorley [aut, cre] (<https://orcid.org/0000-0002-7683-4592>),
   Poisson Consulting [cph, fnd]
 Maintainer: Joe Thorley <joe@poissonconsulting.ca>
 Repository: CRAN
-Date/Publication: 2021-08-05 18:00:02 UTC
+Date/Publication: 2021-09-06 17:30:02 UTC
